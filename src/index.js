@@ -38,7 +38,34 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let decodedCharsArr = [];
+
+    let MorseChar = {
+        '00': '',
+        '10': '.',
+        '11': '-',
+        '**': '**'
+    };
+
+    for (let i = 0; i < expr.length; i += 10) {
+        let MorseChar = '';
+        for (let j = 0; j < 10; j += 2) {
+            let code = expr.slice(i + j, i + j + 2);
+            if (code === '10') {
+                MorseChar += '.';
+                } else if (code === '11') {
+                MorseChar += '-';
+                } else {
+                MorseChar += '';
+            }
+        }
+        if (MorseChar === '') {
+            decodedCharsArr.push(' ');
+        } else {
+            decodedCharsArr.push(MORSE_TABLE[MorseChar]);
+        }
+    }
+    return decodedCharsArr.join('');
 }
 
 module.exports = {
